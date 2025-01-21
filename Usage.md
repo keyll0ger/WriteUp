@@ -1,6 +1,4 @@
-### HackTheBox Challenge
+### HackTheBox Challenge USAGE
 
-|     Usage   |
-|-------------|
-|     EASY    |
+
 
