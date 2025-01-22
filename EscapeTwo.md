@@ -4,10 +4,12 @@
 
 # Nmap
 
+Pour commencer, j'ai effectué une analyse rapide des ports avec la commande suivante :
 ```
 nmap -F -Pn 10.10.11.51
 ```
 
+La sortie de cette commande a révélé les ports suivants ouverts :
 ```
 Nmap scan report for 10.10.11.51
 Host is up (0.026s latency).
@@ -24,10 +26,12 @@ PORT     STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 1.85 seconds
 ```
 
+Ensuite, j’ai effectué une analyse complète des ports pour identifier tous les ports ouverts :
 ```
 nmap -p- --min-rate 10000 -Pn 10.10.11.51
 ```
 
+Les résultats de cette analyse sont les suivants :
 ```
 Nmap scan report for 10.10.11.51
 Host is up (0.18s latency).
@@ -47,14 +51,14 @@ PORT      STATE SERVICE
 49718/tcp open  unknown
 
 Nmap done: 1 IP address (1 host up) scanned in 21.42 seconds
-
 ```
-Scan actif des ports
 
+Pour obtenir plus de détails sur les services en cours d’exécution, j’ai utilisé la commande suivante :
 ```
 nmap -p53,88,135,139,389,445,464,593,636,1433,3268,3269,5985 -sCV 10.10.11.51
 ```
 
+Les résultats détaillés sont :
 ```
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-01-22 05:26 EST
 Nmap scan report for 10.10.11.51
