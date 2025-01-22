@@ -278,9 +278,12 @@ file #1:  bad zipfile offset (local header sig):  0
 
 Contenu de xl/sharedStrings.xml :
 
-Angela Martin : angela@sequel.htb, angela, 0fwz7Q4mSpurIt99
-Oscar Martinez : oscar@sequel.htb, oscar, 86LxLBMgEWaKUnBG
-Kevin Malone : kevin@sequel.htb, kevin, Md9Wlq1E5bZnVDVo
+Angela Martin : angela@sequel.htb, 
+angela, 0fwz7Q4mSpurIt99
+Oscar Martinez : oscar@sequel.htb, 
+oscar, 86LxLBMgEWaKUnBG
+Kevin Malone : kevin@sequel.htb, 
+kevin, Md9Wlq1E5bZnVDVo
 sa : sa@sequel.htb, MSSQLP@ssw0rd!
 
 ```
