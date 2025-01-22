@@ -190,3 +190,36 @@ INFO: Done in 00M 09S
 INFO: Compressing output into 20250122062159_bloodhound.zip
 
 ```
+
+```
+nxc ldap 10.10.11.51 -u rose -p 'KxEPkKe6R8su' -M adcs
+```
+
+```
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating missing folder logs
+[*] Creating missing folder modules
+[*] Creating missing folder protocols
+[*] Creating missing folder workspaces
+[*] Creating missing folder obfuscated_scripts
+[*] Creating missing folder screenshots
+[*] Creating default workspace
+[*] Initializing SSH protocol database
+[*] Initializing MSSQL protocol database
+[*] Initializing SMB protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing NFS protocol database
+[*] Initializing WMI protocol database
+[*] Initializing LDAP protocol database
+[*] Initializing VNC protocol database
+[*] Initializing FTP protocol database
+[*] Initializing RDP protocol database
+[*] Copying default configuration file
+SMB         10.10.11.51     445    DC01             [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC01) (domain:sequel.htb) (signing:True) (SMBv1:False)                                                                                                                 
+LDAP        10.10.11.51     389    DC01             [+] sequel.htb\rose:KxEPkKe6R8su 
+ADCS        10.10.11.51     389    DC01             [*] Starting LDAP search with search filter '(objectClass=pKIEnrollmentService)'
+ADCS        10.10.11.51     389    DC01             Found PKI Enrollment Server: DC01.sequel.htb
+ADCS        10.10.11.51     389    DC01             Found CN: sequel-DC01-CA
+
+```
