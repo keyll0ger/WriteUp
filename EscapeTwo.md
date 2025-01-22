@@ -150,3 +150,6 @@ sudo sh -c "echo  '10.10.11.51 DC01 sequel.htb DC01.sequel.htb' >> /etc/hosts"
 tail -n 1 /etc/hosts
 10.10.11.51 DC01 sequel.htb DC01.sequel.htb    
 ```
+
+Machine Information
+As is common in real life Windows pentests, you will start this box with credentials for the following account: rose / KxEPkKe6R8su
