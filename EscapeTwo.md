@@ -155,3 +155,38 @@ Machine Information
 As is common in real life Windows pentests, you will start this box with credentials for the following account: rose / KxEPkKe6R8su
 
 ### MSSQL
+
+```
+impacket-mssqlclient sequel.htb/rose:KxEPkKe6R8su@10.10.11.51 -windows-auth
+```
+
+```
+ldapdomaindump ldap://10.10.11.51 -u "sequel.htb\rose" -p 'KxEPkKe6R8su'
+```
+
+```
+bloodhound-python -u rose -p KxEPkKe6R8su -ns 10.10.11.51 -d sequel.htb -c all --zip
+```
+
+```
+INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
+INFO: Found AD domain: sequel.htb
+INFO: Getting TGT for user
+WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: [Errno Connection error (dc01.sequel.htb:88)] [Errno -2] Name or service not known
+INFO: Connecting to LDAP server: dc01.sequel.htb
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Connecting to LDAP server: dc01.sequel.htb
+INFO: Found 10 users
+INFO: Found 59 groups
+INFO: Found 2 gpos
+INFO: Found 1 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: DC01.sequel.htb
+INFO: Done in 00M 09S
+INFO: Compressing output into 20250122062159_bloodhound.zip
+
+```
