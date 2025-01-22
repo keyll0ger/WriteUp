@@ -2,6 +2,7 @@
 
 ##Enumération 
 
-''' nmap -F -Pn $IP '''
-
+```
+nmap -F -Pn $IP 
+```
 
