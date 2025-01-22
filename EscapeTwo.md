@@ -142,6 +142,7 @@ Nmap done: 1 IP address (1 host up) scanned in 86.79 seconds
 * Services: DNS - KERBEROS - LDAP - SMB - MSSQL - winRM - LDAPS
 * Important notes: Domain: sequel.htb - DNS:DC01.sequel.htb - Microsoft SQL Server 2019
 
+Fichier Hosts
 ```
 sudo sh -c "echo  '10.10.11.51 DC01 sequel.htb DC01.sequel.htb' >> /etc/hosts" 
 [sudo] password for kali: 
