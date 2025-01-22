@@ -135,3 +135,8 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 86.79 seconds
 ```
+
+* Open ports: 53-88-135-139-389-445-464-593-636-1433-3268-3269-5985
+* UDP open ports: 
+* Services: DNS - KERBEROS - LDAP - SMB - MSSQL - winRM - LDAPS
+* Important notes: Domain: sequel.htb - DNS:DC01.sequel.htb - Microsoft SQL Server 2019
