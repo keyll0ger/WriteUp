@@ -1,5 +1,7 @@
 # CICADA HTB WRITE UP
 
+![image](https://github.com/user-attachments/assets/1cf736dd-fac1-40c0-aba2-5c103d0076ca)
+
 ```bash
 ┌──(keylloger㉿Kali)-[~/…/VM/HTB/EASY/Cicada]
 └─$ nmap -sV -sC -p- -vv 10.10.11.35 -oN cicada.txt 
