@@ -325,7 +325,11 @@ The following ports were found open:
 - **Valid Until:** 2025-08-22 20:24:16
 - **SHA-1 Fingerprint:** `2c93:6d7b:cfd8:11b9:9f71:1a5a:155d:88d3:4a52:157a`
 
-# Explication de la commande `nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares`
+## Explication de la commande:
+
+```bash
+nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
+```
 
 Cette commande est utilisée pour interagir avec un serveur SMB à l'adresse IP `10.10.11.35` en utilisant un utilisateur `guest` sans mot de passe, tout en tentant de bruteforcer les RID (identifiants relatifs) et en énumérant les partages SMB disponibles.
 
