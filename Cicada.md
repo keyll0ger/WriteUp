@@ -288,6 +288,38 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 293.43 seconds
            Raw packets sent: 131207 (5.773MB) | Rcvd: 151 (6.628KB)
 ```
+# Nmap Scan Report for 10.10.11.35
+
+**Scan Initiated:** 2025-01-25 21:22 CET  
+**Scan Duration:** 293 seconds  
+**Host Status:** Up (echo-reply ttl 127, 0.027s latency)
+
+## Open Ports
+The following ports were found open:
+
+| Port      | Service           | Version                                      |
+|-----------|-------------------|----------------------------------------------|
+| 53/tcp    | domain            | Simple DNS Plus                              |
+| 88/tcp    | kerberos-sec      | Microsoft Windows Kerberos                   |
+| 135/tcp   | msrpc             | Microsoft Windows RPC                        |
+| 139/tcp   | netbios-ssn       | Microsoft Windows netbios-ssn                |
+| 389/tcp   | ldap              | Microsoft Windows Active Directory LDAP      |
+| 445/tcp   | microsoft-ds      | Unknown                                      |
+| 464/tcp   | kpasswd5          | Unknown                                      |
+| 593/tcp   | ncacn_http        | Microsoft Windows RPC over HTTP 1.0          |
+| 636/tcp   | ssl/ldap          | Microsoft Windows Active Directory LDAP      |
+| 3268/tcp  | ldap              | Microsoft Windows Active Directory LDAP      |
+| 3269/tcp  | ssl/ldap          | Microsoft Windows Active Directory LDAP      |
+
+## SSL Certificates
+
+### Common Name: CICADA-DC.cicada.htb
+- **Issuer:** CICADA-DC-CA/domainComponent=cicada
+- **Public Key Type:** RSA
+- **Public Key Bits:** 2048
+- **Valid From:** 2024-08-22 20:24:16
+- **Valid Until:** 2025-08-22 20:24:16
+- **SHA-1 Fingerprint:** `2c93:6d7b:cfd8:11b9:9f71:1a5a:155d:88d3:4a52:157a`
 
 ```bash
 nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
