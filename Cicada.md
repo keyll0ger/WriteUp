@@ -325,19 +325,55 @@ The following ports were found open:
 - **Valid Until:** 2025-08-22 20:24:16
 - **SHA-1 Fingerprint:** `2c93:6d7b:cfd8:11b9:9f71:1a5a:155d:88d3:4a52:157a`
 
+# Explication de la commande `nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares`
+
+Cette commande est utilisée pour interagir avec un serveur SMB à l'adresse IP `10.10.11.35` en utilisant un utilisateur `guest` sans mot de passe, tout en tentant de bruteforcer les RID (identifiants relatifs) et en énumérant les partages SMB disponibles.
+
+## Détails de la commande :
+
 ```bash
 nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
 ```
 
+### 1. **nxc**
+- `nxc` est un outil de ligne de commande permettant d'interagir avec des hôtes SMB. Il est utilisé pour effectuer des tests de pénétration, des explorations ou des attaques sur des serveurs SMB. Cela permet de scanner, bruteforcer des mots de passe et exécuter diverses actions sur des partages SMB.
+
+### 2. **smb**
+- Cette option indique que la commande va utiliser le protocole SMB (Server Message Block) pour interagir avec l'hôte distant. SMB est utilisé pour le partage de fichiers et d'imprimantes sur un réseau local.
+
+### 3. **10.10.11.35**
+- Il s'agit de l'adresse IP de la machine cible à laquelle vous vous connectez via SMB. Cette adresse cible est `10.10.11.35`.
+
+### 4. **-u guest**
+- L'option `-u` spécifie l'utilisateur avec lequel vous tentez de vous connecter au serveur SMB. Dans ce cas, l'utilisateur est `guest`, un compte souvent utilisé pour l'accès limité ou public aux ressources partagées.
+
+### 5. **-p ''**
+- L'option `-p` définit le mot de passe associé à l'utilisateur spécifié. Ici, le mot de passe est vide (`''`), ce qui signifie que la commande tente de se connecter avec l'utilisateur `guest` sans mot de passe.
+
+### 6. **--rid-brute**
+- L'option `--rid-brute` active le bruteforce des RID (Relative Identifier). Un RID est un identifiant unique attribué à chaque utilisateur ou groupe dans un domaine Windows. Cette option permet de tester plusieurs RID pour énumérer les utilisateurs sur le serveur SMB cible.
+
+### 7. **--shares**
+- L'option `--shares` permet d'énumérer les partages SMB disponibles sur le serveur cible. Un partage SMB est une ressource partagée (dossier, imprimante, etc.) accessible à partir du réseau. Cette option liste tous les partages disponibles sur la machine cible.
+
+## Ce que fait cette commande :
+
+1. **Connexion au serveur SMB** : La commande tente de se connecter au serveur SMB à l'adresse IP `10.10.11.35` avec l'utilisateur `guest` sans mot de passe.
+2. **Bruteforce des RID** : Elle effectue un bruteforce sur les RID pour énumérer les utilisateurs présents sur le serveur cible.
+3. **Énumération des partages** : Elle liste les partages SMB disponibles sur le serveur cible.
+4. **Affichage des résultats** : Si la commande réussit, elle affiche les partages et les utilisateurs trouvés sur la machine cible.
+
+## Exemple de sortie attendue :
+
 ```bash
-smbclient //10.10.11.35/HR 
-Password for [WORKGROUP\keylloger]:
-Try "help" to get a list of possible commands.
 smb: \> ls
   .                                   D        0  Thu Mar 14 13:29:09 2024
   ..                                  D        0  Thu Mar 14 13:21:29 2024
   Notice from HR.txt                  A     1266  Wed Aug 28 19:31:48 2024
 ```
+
+Dans cet exemple, la commande a trouvé un fichier `Notice from HR.txt` dans le répertoire `HR` sur le serveur SMB.
+
 
 On y voit un mot de passe sans nom d'utilisateur
 
