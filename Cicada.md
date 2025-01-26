@@ -335,12 +335,6 @@ nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
 
 Cette commande est utilisée pour interagir avec un serveur SMB à l'adresse IP `10.10.11.35` en utilisant un utilisateur `guest` sans mot de passe, tout en tentant de bruteforcer les RID (identifiants relatifs) et en énumérant les partages SMB disponibles.
 
-## Détails de la commande :
-
-```bash
-nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
-```
-
 ### 1. **nxc**
 - `nxc` est un outil de ligne de commande permettant d'interagir avec des hôtes SMB. Il est utilisé pour effectuer des tests de pénétration, des explorations ou des attaques sur des serveurs SMB. Cela permet de scanner, bruteforcer des mots de passe et exécuter diverses actions sur des partages SMB.
 
