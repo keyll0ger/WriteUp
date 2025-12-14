@@ -1,4 +1,4 @@
-# 🎯 FLUFFY - HTB Write-Up Complet et Optimisé
+# 🎯 FLUFFY - HTB Write-Up 
 
 ## 📋 Résumé Exécutif
 
