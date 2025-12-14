@@ -1,4 +1,4 @@
-# 🖨️ RETURN - HTB Write-Up Complet et Optimisé
+# 🖨️ RETURN - HTB Write-Up 
 
 ## 📋 Résumé Exécutif
 
